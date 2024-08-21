@@ -1,44 +1,49 @@
-document.getElementById('search-button').addEventListener('click', function() {
-    const query = document.getElementById('search-input').value;
-    if (query.trim() !== "") {
-        fetchResults(query);
-    } else {
-        alert("Por favor, ingresa un término de búsqueda.");
+document.addEventListener('DOMContentLoaded', () => {
+    const apiUrls = {
+        people: 'https://swapi.dev/api/people/',
+        planets: 'https://swapi.dev/api/planets/',
+        starships: 'https://swapi.dev/api/starships/'
+    };
+
+    const resultsSection = document.getElementById('results');
+
+    function fetchData(url, category) {
+        return fetch(url)
+            .then(response => response.json())
+            .then(data => {
+                const container = document.createElement('div');
+                container.className = 'category-container';
+
+                const header = document.createElement('h2');
+                header.textContent = category.charAt(0).toUpperCase() + category.slice(1);
+                container.appendChild(header);
+
+                data.results.forEach(item => {
+                    const itemContainer = document.createElement('div');
+                    itemContainer.className = 'item-container';
+
+                    let detailsHTML = '';
+                    for (const key in item) {
+                        detailsHTML += `<p><strong>${key.charAt(0).toUpperCase() + key.slice(1)}:</strong> ${item[key]}</p>`;
+                    }
+
+                    itemContainer.innerHTML = detailsHTML;
+                    container.appendChild(itemContainer);
+                });
+
+                resultsSection.appendChild(container);
+
+                // Handle pagination
+                if (data.next) {
+                    fetchData(data.next, category);
+                }
+            })
+            .catch(error => {
+                console.error(`Error fetching ${category}:`, error);
+                resultsSection.innerHTML += `<p>Hubo un error al cargar ${category}. Intenta nuevamente.</p>`;
+            });
     }
+
+    // Fetch all data
+    Object.keys(apiUrls).forEach(category => fetchData(apiUrls[category], category));
 });
-
-async function fetchResults(query) {
-    const url = `https://swapi.dev/api/people/?search=${query}`;
-    try {
-        const response = await fetch(url);
-        const data = await response.json();
-        displayResults(data.results);
-    } catch (error) {
-        console.error("Error al obtener los datos:", error);
-        alert("Hubo un problema al obtener los datos. Inténtalo de nuevo.");
-    }
-}
-
-function displayResults(results) {
-    const resultsSection = document.getElementById('results-section');
-    resultsSection.innerHTML = '';  // Limpiar resultados anteriores
-
-    if (results.length > 0) {
-        results.forEach(result => {
-            const resultDiv = document.createElement('div');
-            resultDiv.classList.add('result-item');
-            resultDiv.innerHTML = `
-                <h2>${result.name}</h2>
-                <p><strong>Género:</strong> ${result.gender}</p>
-                <p><strong>Altura:</strong> ${result.height} cm</p>
-                <p><strong>Peso:</strong> ${result.mass} kg</p>
-                <p><strong>Color de cabello:</strong> ${result.hair_color}</p>
-                <p><strong>Color de piel:</strong> ${result.skin_color}</p>
-                <p><strong>Año de nacimiento:</strong> ${result.birth_year}</p>
-            `;
-            resultsSection.appendChild(resultDiv);
-        });
-    } else {
-        resultsSection.innerHTML = '<p>No se encontraron resultados</p>';
-    }
-}
