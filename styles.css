@@ -1,3 +1,4 @@
+/* Estilos generales */
 body, html {
     margin: 0;
     padding: 0;
@@ -17,7 +18,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7)
+    background: rgba(0, 0, 0, 0.7);
 }
 
 header {
@@ -34,6 +35,41 @@ h1 {
     text-shadow: 2px 2px 8px #000;
 }
 
+/* Barra de navegación */
+nav {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 10px;
+    text-align: center;
+    position: relative;
+    z-index: 1;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+}
+
+nav ul li {
+    margin: 0 15px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+    padding: 5px 10px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+nav ul li a:hover {
+    background-color: #00bfff;
+}
+
+/* Barra de búsqueda */
 #search-section {
     display: flex;
     justify-content: center;
@@ -42,7 +78,7 @@ h1 {
     z-index: 1;
 }
 
-#search-input {
+#searchInput {
     width: 300px;
     padding: 10px;
     font-size: 16px;
@@ -53,7 +89,7 @@ h1 {
     color: white;
 }
 
-#search-button {
+#searchButton {
     padding: 10px;
     margin-left: 10px;
     font-size: 16px;
@@ -65,18 +101,31 @@ h1 {
     box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
 }
 
-#search-button:hover {
+#searchButton:hover {
     background-color: #1e90ff;
 }
 
+/* Sección de resultados */
 #results-section {
     padding: 20px;
     position: relative;
     z-index: 1;
 }
 
-.result-item {
-    background-color: rgba(0, 0, 0, 0.8);
+.category-container {
+    margin-bottom: 20px;
+}
+
+.item-container {
+    margin: 10px 0;
+    padding: 10px;
+    border: 1px solid #555;
+    border-radius: 5px;
+    background: rgba(0, 0, 0, 0.8); 
+}
+
+.person-container {
+    background-color: rgba(0, 0, 0, 0.8); 
     padding: 20px;
     margin: 10px 0;
     border-radius: 4px;
