@@ -1,0 +1,73 @@
+*{
+    padding: 0px;
+    margin: 0px;
+    font-family: monospace;
+    
+}
+
+
+
+.contenedor{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    align-items: center;
+    justify-content: space-around;
+}
+
+h1{
+    position: relative;
+    color: white;
+    font-size: 50px;
+}
+
+.video-fondo{
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    pointer-events: none; 
+    z-index: -1;
+}
+
+
+.imagen-pjs{
+    height: 200px;
+    
+}
+
+.tarjeta-opcion{
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    height: 300px;
+    align-items: center;
+    justify-content: space-around;
+    transition: transform 0.5s;
+    border-radius: 20px;
+    border: solid 5px black;
+}
+
+.tarjeta-opcion:hover{
+    transform: scale(1.1);
+}
+
+.contenedor-tarjetas{
+    margin-bottom: 6%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 50px 60px   ;
+}
+
+.boton{
+    background-color: red;
+    color: white;
+    
+}
+
+a{
+    text-decoration: none;
+    color: black;
+}
