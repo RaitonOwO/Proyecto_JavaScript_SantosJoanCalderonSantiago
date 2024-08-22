@@ -1,8 +1,12 @@
 document.querySelector('.buscador button').addEventListener('click', function (e) {
     e.preventDefault();
 
-    const inputBusqueda = document.querySelector('.buscador input[type="text"]').value;
-    const apiUrl = `https://swapi.dev/api/people/?search=${inputBusqueda}`;
+    const nombre = document.getElementById('nombre').value.toLowerCase();
+    const edad = document.getElementById('edad').value.toLowerCase();
+    const genero = document.getElementById('genero').value.toLowerCase();
+    const colorCabello = document.getElementById('color-cabello').value.toLowerCase();
+
+    const apiUrl = `https://swapi.dev/api/people/?search=${nombre}`;
 
     fetch(apiUrl)
         .then(response => response.json())
@@ -15,7 +19,19 @@ document.querySelector('.buscador button').addEventListener('click', function (e
                 return;
             }
 
-            data.results.forEach(personaje => {
+            // Filtrado adicional basado en los otros campos
+            const personajesFiltrados = data.results.filter(personaje => {
+                return (edad === '' || personaje.birth_year.toLowerCase() === edad) &&
+                       (genero === '' || personaje.gender.toLowerCase() === genero) &&
+                       (colorCabello === '' || personaje.hair_color.toLowerCase().includes(colorCabello));
+            });
+
+            if (personajesFiltrados.length === 0) {
+                seccionResultados.innerHTML = '<p>No se encontraron personajes con los filtros aplicados.</p>';
+                return;
+            }
+
+            personajesFiltrados.forEach(personaje => {
                 const tarjetaPersonaje = document.createElement('div');
                 tarjetaPersonaje.className = 'tarjeta-item';
 
@@ -25,6 +41,7 @@ document.querySelector('.buscador button').addEventListener('click', function (e
                     <p><strong>Peso:</strong> ${personaje.mass} kg</p>
                     <p><strong>Color de cabello:</strong> ${personaje.hair_color}</p>
                     <p><strong>Color de piel:</strong> ${personaje.skin_color}</p>
+          
                     <p><strong>Color de ojos:</strong> ${personaje.eye_color}</p>
                     <p><strong>Año de nacimiento:</strong> ${personaje.birth_year}</p>
                     <p><strong>Género:</strong> ${personaje.gender}</p>
