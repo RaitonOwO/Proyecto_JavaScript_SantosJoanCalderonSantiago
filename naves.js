@@ -1,25 +1,25 @@
-document.getElementById('searchForm').addEventListener('submit', function (e) {
+document.querySelector('.buscador button').addEventListener('click', function (e) {
     e.preventDefault();
 
-    const searchInput = document.getElementById('searchInput').value;
-    const apiUrl = `https://swapi.dev/api/starships/?search=${searchInput}`;
+    const inputBusqueda = document.querySelector('.buscador input[type="text"]').value;
+    const apiUrl = `https://swapi.dev/api/starships/?search=${inputBusqueda}`;
 
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            const resultsSection = document.getElementById('results');
-            resultsSection.innerHTML = '';
+            const seccionResultados = document.getElementById('seccion-resultados');
+            seccionResultados.innerHTML = '';
 
             if (data.results.length === 0) {
-                resultsSection.innerHTML = '<p>No se encontraron naves.</p>';
+                seccionResultados.innerHTML = '<p>No se encontraron naves.</p>';
                 return;
             }
 
             data.results.forEach(nave => {
-                const starshipContainer = document.createElement('div');
-                starshipContainer.className = 'person-container';
+                const tarjetaNave = document.createElement('div');
+                tarjetaNave.className = 'tarjeta-item';
 
-                const detailsHTML = `
+                const detallesHTML = `
                     <h2>${nave.name}</h2>
                     <p><strong>Modelo:</strong> ${nave.model}</p>
                     <p><strong>Fabricante:</strong> ${nave.manufacturer}</p>
@@ -28,12 +28,12 @@ document.getElementById('searchForm').addEventListener('submit', function (e) {
                     <p><strong>Velocidad atmosférica máxima:</strong> ${nave.max_atmosphering_speed}</p>
                 `;
 
-                starshipContainer.innerHTML = detailsHTML;
-                resultsSection.appendChild(starshipContainer);
+                tarjetaNave.innerHTML = detallesHTML;
+                seccionResultados.appendChild(tarjetaNave);
             });
         })
         .catch(error => {
             console.error('Error en la búsqueda:', error);
-            document.getElementById('results').innerHTML = '<p>Hubo un error en la búsqueda. Por favor, intenta nuevamente.</p>';
+            document.getElementById('seccion-resultados').innerHTML = '<p>Hubo un error en la búsqueda. Por favor, intenta nuevamente.</p>';
         });
 });

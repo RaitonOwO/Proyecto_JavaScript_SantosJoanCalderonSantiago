@@ -1,13 +1,13 @@
-document.getElementById('searchForm').addEventListener('submit', function (e) {
+document.querySelector('.buscador button').addEventListener('click', function (e) {
     e.preventDefault();
 
-    const searchInput = document.getElementById('searchInput').value;
+    const searchInput = document.querySelector('.buscador input[type="text"]').value;
     const apiUrl = `https://swapi.dev/api/planets/?search=${searchInput}`;
 
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            const resultsSection = document.getElementById('results');
+            const resultsSection = document.getElementById('seccion-resultados');
             resultsSection.innerHTML = '';
 
             if (data.results.length === 0) {
@@ -17,7 +17,7 @@ document.getElementById('searchForm').addEventListener('submit', function (e) {
 
             data.results.forEach(planeta => {
                 const planetContainer = document.createElement('div');
-                planetContainer.className = 'person-container';
+                planetContainer.className = 'tarjeta-item';
 
                 const detailsHTML = `
                     <h2>${planeta.name}</h2>
@@ -33,6 +33,6 @@ document.getElementById('searchForm').addEventListener('submit', function (e) {
         })
         .catch(error => {
             console.error('Error en la búsqueda:', error);
-            document.getElementById('results').innerHTML = '<p>Hubo un error en la búsqueda. Por favor, intenta nuevamente.</p>';
+            document.getElementById('seccion-resultados').innerHTML = '<p>Hubo un error en la búsqueda. Por favor, intenta nuevamente.</p>';
         });
 });

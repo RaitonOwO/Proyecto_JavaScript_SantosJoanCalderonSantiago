@@ -1,25 +1,25 @@
-document.getElementById('searchForm').addEventListener('submit', function (e) {
+document.querySelector('.buscador button').addEventListener('click', function (e) {
     e.preventDefault();
 
-    const searchInput = document.getElementById('searchInput').value;
-    const apiUrl = `https://swapi.dev/api/people/?search=${searchInput}`;
+    const inputBusqueda = document.querySelector('.buscador input[type="text"]').value;
+    const apiUrl = `https://swapi.dev/api/people/?search=${inputBusqueda}`;
 
     fetch(apiUrl)
         .then(response => response.json())
         .then(data => {
-            const resultsSection = document.getElementById('results');
-            resultsSection.innerHTML = '';
+            const seccionResultados = document.getElementById('seccion-resultados');
+            seccionResultados.innerHTML = '';
 
             if (data.results.length === 0) {
-                resultsSection.innerHTML = '<p>No se encontraron personajes.</p>';
+                seccionResultados.innerHTML = '<p>No se encontraron personajes.</p>';
                 return;
             }
 
             data.results.forEach(personaje => {
-                const personContainer = document.createElement('div');
-                personContainer.className = 'person-container';
+                const tarjetaPersonaje = document.createElement('div');
+                tarjetaPersonaje.className = 'tarjeta-item';
 
-                const detailsHTML = `
+                const detallesHTML = `
                     <h2>${personaje.name}</h2>
                     <p><strong>Altura:</strong> ${personaje.height} cm</p>
                     <p><strong>Peso:</strong> ${personaje.mass} kg</p>
@@ -30,12 +30,12 @@ document.getElementById('searchForm').addEventListener('submit', function (e) {
                     <p><strong>Género:</strong> ${personaje.gender}</p>
                 `;
 
-                personContainer.innerHTML = detailsHTML;
-                resultsSection.appendChild(personContainer);
+                tarjetaPersonaje.innerHTML = detallesHTML;
+                seccionResultados.appendChild(tarjetaPersonaje);
             });
         })
         .catch(error => {
             console.error('Error en la búsqueda:', error);
-            document.getElementById('results').innerHTML = '<p>Hubo un error en la búsqueda. Por favor, intenta nuevamente.</p>';
+            document.getElementById('seccion-resultados').innerHTML = '<p>Hubo un error en la búsqueda. Por favor, intenta nuevamente.</p>';
         });
 });

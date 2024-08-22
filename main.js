@@ -1,49 +1,49 @@
 document.addEventListener('DOMContentLoaded', () => {
-    const apiUrls = {
-        people: 'https://swapi.dev/api/people/',
-        planets: 'https://swapi.dev/api/planets/',
-        starships: 'https://swapi.dev/api/starships/'
+    const urlsApi = {
+        personajes: 'https://swapi.dev/api/people/',
+        planetas: 'https://swapi.dev/api/planets/',
+        naves: 'https://swapi.dev/api/starships/'
     };
 
-    const resultsSection = document.getElementById('results');
+    const seccionResultados = document.getElementById('seccion-resultados');
 
-    function fetchData(url, category) {
+    function obtenerDatos(url, categoria) {
         return fetch(url)
             .then(response => response.json())
             .then(data => {
-                const container = document.createElement('div');
-                container.className = 'category-container';
+                const contenedorCategoria = document.createElement('div');
+                contenedorCategoria.className = 'contenedor-categoria';
 
-                const header = document.createElement('h2');
-                header.textContent = category.charAt(0).toUpperCase() + category.slice(1);
-                container.appendChild(header);
+                const encabezado = document.createElement('h2');
+                encabezado.textContent = categoria.charAt(0).toUpperCase() + categoria.slice(1);
+                contenedorCategoria.appendChild(encabezado);
 
                 data.results.forEach(item => {
-                    const itemContainer = document.createElement('div');
-                    itemContainer.className = 'item-container';
+                    const contenedorItem = document.createElement('div');
+                    contenedorItem.className = 'tarjeta-item';
 
-                    let detailsHTML = '';
+                    let detallesHTML = '';
                     for (const key in item) {
-                        detailsHTML += `<p><strong>${key.charAt(0).toUpperCase() + key.slice(1)}:</strong> ${item[key]}</p>`;
+                        detallesHTML += `<p><strong>${key.charAt(0).toUpperCase() + key.slice(1)}:</strong> ${item[key]}</p>`;
                     }
 
-                    itemContainer.innerHTML = detailsHTML;
-                    container.appendChild(itemContainer);
+                    contenedorItem.innerHTML = detallesHTML;
+                    contenedorCategoria.appendChild(contenedorItem);
                 });
 
-                resultsSection.appendChild(container);
+                seccionResultados.appendChild(contenedorCategoria);
 
-                // Handle pagination
+                // Manejo de la paginación
                 if (data.next) {
-                    fetchData(data.next, category);
+                    obtenerDatos(data.next, categoria);
                 }
             })
             .catch(error => {
-                console.error(`Error fetching ${category}:`, error);
-                resultsSection.innerHTML += `<p>Hubo un error al cargar ${category}. Intenta nuevamente.</p>`;
+                console.error(`Error al obtener ${categoria}:`, error);
+                seccionResultados.innerHTML += `<p>Hubo un error al cargar ${categoria}. Intenta nuevamente.</p>`;
             });
     }
 
-    // Fetch all data
-    Object.keys(apiUrls).forEach(category => fetchData(apiUrls[category], category));
+    // Obtener todos los datos
+    Object.keys(urlsApi).forEach(categoria => obtenerDatos(urlsApi[categoria], categoria));
 });
