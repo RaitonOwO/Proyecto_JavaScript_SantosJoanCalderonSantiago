@@ -1,4 +1,3 @@
-/* Estilos generales */
 body, html {
     margin: 0;
     padding: 0;
@@ -8,11 +7,11 @@ body, html {
 }
 
 body {
-    background: url('https://i.pinimg.com/originals/22/1c/22/221c2209a85f591c1a68e82356ce3a1c.jpg') no-repeat center center fixed;
+    background: url('https://www.pixel4k.com/wp-content/uploads/2021/03/darth-vader-rogue-one-4k_1615195144-768x432.jpg') no-repeat center center fixed ;
     background-size: cover;
 }
 
-.overlay {
+.superposicion {
     position: absolute;
     top: 0;
     left: 0;
@@ -22,12 +21,15 @@ body {
 }
 
 header {
-    background: rgba(0, 0, 0, 0.8);
+    background: linear-gradient(to top, #000000, #660000);
     padding: 20px;
     text-align: center;
     position: relative;
     z-index: 1;
 }
+
+
+
 
 h1 {
     margin: 0;
@@ -35,7 +37,6 @@ h1 {
     text-shadow: 2px 2px 8px #000;
 }
 
-/* Barra de navegación */
 nav {
     background-color: rgba(0, 0, 0, 0.8);
     padding: 10px;
@@ -69,8 +70,7 @@ nav ul li a:hover {
     background-color: #00bfff;
 }
 
-/* Barra de búsqueda */
-#search-section {
+.buscador {
     display: flex;
     justify-content: center;
     margin: 50px 0;
@@ -78,7 +78,7 @@ nav ul li a:hover {
     z-index: 1;
 }
 
-#searchInput {
+.buscador input[type="text"] {
     width: 300px;
     padding: 10px;
     font-size: 16px;
@@ -89,7 +89,7 @@ nav ul li a:hover {
     color: white;
 }
 
-#searchButton {
+.buscador button {
     padding: 10px;
     margin-left: 10px;
     font-size: 16px;
@@ -101,31 +101,18 @@ nav ul li a:hover {
     box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
 }
 
-#searchButton:hover {
+.buscador button:hover {
     background-color: #1e90ff;
 }
 
-/* Sección de resultados */
-#results-section {
+#seccion-resultados {
     padding: 20px;
     position: relative;
     z-index: 1;
 }
 
-.category-container {
-    margin-bottom: 20px;
-}
-
-.item-container {
-    margin: 10px 0;
-    padding: 10px;
-    border: 1px solid #555;
-    border-radius: 5px;
-    background: rgba(0, 0, 0, 0.8); 
-}
-
-.person-container {
-    background-color: rgba(0, 0, 0, 0.8); 
+.tarjeta-item {
+    background-color: rgba(0, 0, 0, 0.6); 
     padding: 20px;
     margin: 10px 0;
     border-radius: 4px;
