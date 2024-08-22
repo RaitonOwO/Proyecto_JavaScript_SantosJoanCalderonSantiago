@@ -3,26 +3,32 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Buscar Naves</title>
+    <title>Buscador de Star Wars - Naves</title>
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <div class="overlay"></div>
+    <div class="superposicion"></div>
     <header>
-        <h1>Buscar Naves</h1>
+        <h1>Buscador de Star Wars - Naves</h1>
     </header>
 
-    <section id="search-section">
-        <form id="searchForm">
-            <input type="text" id="searchInput" placeholder="Ingrese el nombre de una nave">
-            <button type="submit" id="searchButton">Buscar</button>
-        </form>
-    </section>
+    <nav>
+        <ul>
+            <li><a href="index.html">Inicio</a></li>
+            <li><a href="personajes.html">Personajes</a></li>
+            <li><a href="planetas.html">Planetas</a></li>
+            <li><a href="naves.html">Naves</a></li>
+        </ul>
+    </nav>
 
-    <section id="results-section">
-        <div id="results"></div>
-    </section>
+    <div class="buscador">
+        <input type="text" id="entrada-busqueda" placeholder="Buscar nave...">
+        <button id="boton-busqueda">Buscar</button>
+    </div>
+    
 
-    <script src="naves.js"></script> 
+    <section id="seccion-resultados"></section>
+
+    <script src="naves.js"></script>
 </body>
 </html>
