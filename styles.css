@@ -12,7 +12,7 @@
     justify-content: center;
     flex-direction: column;
     height: 100vh;
-    width: 100vw;
+    width: 100%;
     align-items: center;
     justify-content: space-around;
 }
@@ -24,8 +24,8 @@ h1{
 }
 
 .video-fondo{
-    height: 100vh;
-    width: 100vw;
+    height: 100%;
+    width: 100%;
     position: absolute;
     pointer-events: none; 
     z-index: -1;
@@ -41,7 +41,7 @@ h1{
     display: flex;
     flex-direction: column;
     background-color: white;
-    height: 300px;
+    height: 250px;
     align-items: center;
     justify-content: space-around;
     transition: transform 0.5s;
@@ -56,7 +56,7 @@ h1{
 .contenedor-tarjetas{
     margin-bottom: 6%;
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-columns: 30% 30% 30%;
     grid-template-rows: 1fr 1fr;
     gap: 50px 60px   ;
 }
@@ -71,3 +71,64 @@ a{
     text-decoration: none;
     color: black;
 }
+
+@media (max-width: 1200px ) {
+    body{
+        background-image: url(https://cdn.pixabay.com/photo/2016/01/27/15/25/space-1164579_1280.png);
+    }
+
+    .video-fondo{
+        display: none;
+    }
+
+    .contenedor-tarjetas{
+        grid-template-columns: 1fr 1fr;
+        grid-template-rows: 33% 33% 33%;
+    }
+
+    h1{
+        color: white;
+    }
+
+    .tarjeta-opcion{
+        width: 80%;
+    }
+
+    a{
+        display: flex;
+        justify-content: center;
+    }
+
+    .imagen-pjs{
+        width: 100%;
+    }
+}
+
+@media (max-width: 600px ) {
+    .video-fondo{
+        display: none;
+    }
+
+    .contenedor-tarjetas{
+        grid-template-columns: 1fr;
+        grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr;
+    }
+
+    h1{
+        color: white;
+    }
+
+    .tarjeta-opcion{
+        width: 80%;
+    }
+
+    a{
+        display: flex;
+        justify-content: center;
+    }
+
+    .imagen-pjs{
+        width: 100%;
+    }
+}
+
